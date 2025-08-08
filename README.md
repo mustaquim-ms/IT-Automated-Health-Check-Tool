@@ -1,3 +1,5 @@
+![IT-Health-Check-Script](monitoring.png)
+
 # 🖥️ IT-Health-Check-Script
 
 Automated **system health check** for Windows & Linux servers.  
