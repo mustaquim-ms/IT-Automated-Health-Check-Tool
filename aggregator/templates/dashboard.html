@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>IT Health Aggregator Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>body{font-family:Inter,Segoe UI,Arial;padding:20px} .card{background:#fff;padding:16px;border-radius:8px;box-shadow:0 6px 18px rgba(12,24,48,0.06);margin-bottom:18px}</style>
+</head>
+<body>
+  <h2>IT Health Aggregator</h2>
+  <div class="card">
+    <h3>Hosts (recent)</h3>
+    <ul>
+      {% for host,count in hosts.items() %}
+        <li>{{ host }} — {{ count }} reports</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Health Score Distribution (recent)</h3>
+    <canvas id="scoreChart"></canvas>
+  </div>
+
+<script>
+const scores = {{ scores|tojson }};
+const labels = scores.map((s,i)=> i+1);
+const ctx = document.getElementById('scoreChart').getContext('2d');
+new Chart(ctx, {
+  type: 'line',
+  data: { labels: labels, datasets: [{ label: 'Health Score', data: scores, fill:false, tension:0.2 }] },
+  options: { responsive:true, scales:{ y:{min:0,max:100}} }
+});
+</script>
+</body>
+</html>
