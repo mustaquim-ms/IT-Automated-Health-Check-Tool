@@ -1,0 +1,2328 @@
+{
+  "host": "Omni-IT-02",
+  "platform": "Windows-11-10.0.26100-SP0",
+  "uptime_seconds": 860538.9996607304,
+  "ip": "169.254.169.175",
+  "iface": "Local Area Connection* 9",
+  "cpu_percent": 22.3,
+  "memory_total_mb": 7884.87,
+  "memory_used_mb": 7007.31,
+  "memory_percent": 88.9,
+  "disks": [
+    {
+      "mount": "C:\\",
+      "device": "C:\\",
+      "total_gb": 160.5,
+      "used_gb": 106.34,
+      "free_gb": 54.16,
+      "percent": 66.3
+    },
+    {
+      "mount": "D:\\",
+      "device": "D:\\",
+      "total_gb": 174.7,
+      "used_gb": 130.19,
+      "free_gb": 44.51,
+      "percent": 74.5
+    },
+    {
+      "mount": "E:\\",
+      "device": "E:\\",
+      "total_gb": 174.69,
+      "used_gb": 123.13,
+      "free_gb": 51.56,
+      "percent": 70.5
+    },
+    {
+      "mount": "G:\\",
+      "device": "G:\\",
+      "total_gb": 16.11,
+      "used_gb": 0.1,
+      "free_gb": 16.01,
+      "percent": 0.6
+    }
+  ],
+  "network_interfaces": [
+    {
+      "iface": "Local Area Connection* 9",
+      "address": "169.254.169.175",
+      "netmask": "255.255.0.0"
+    },
+    {
+      "iface": "Local Area Connection* 10",
+      "address": "169.254.159.174",
+      "netmask": "255.255.0.0"
+    },
+    {
+      "iface": "Wi-Fi",
+      "address": "192.168.0.102",
+      "netmask": "255.255.255.0"
+    },
+    {
+      "iface": "Loopback Pseudo-Interface 1",
+      "address": "127.0.0.1",
+      "netmask": "255.0.0.0"
+    }
+  ],
+  "network_online": true,
+  "top_cpu_processes": [
+    {
+      "pid": 0,
+      "name": "System Idle Process",
+      "cpu": 0.0,
+      "mem_mb": 0.01
+    },
+    {
+      "pid": 4,
+      "name": "System",
+      "cpu": 0.0,
+      "mem_mb": 0.12
+    },
+    {
+      "pid": 116,
+      "name": "",
+      "cpu": 0.0,
+      "mem_mb": 38.66
+    },
+    {
+      "pid": 160,
+      "name": "Registry",
+      "cpu": 0.0,
+      "mem_mb": 6.89
+    },
+    {
+      "pid": 620,
+      "name": "smss.exe",
+      "cpu": 0.0,
+      "mem_mb": 0.0
+    },
+    {
+      "pid": 636,
+      "name": "csrss.exe",
+      "cpu": 0.0,
+      "mem_mb": 1.08
+    },
+    {
+      "pid": 648,
+      "name": "wininit.exe",
+      "cpu": 0.0,
+      "mem_mb": 0.24
+    },
+    {
+      "pid": 960,
+      "name": "csrss.exe",
+      "cpu": 0.0,
+      "mem_mb": 0.95
+    }
+  ],
+  "score": 88,
+  "remediations": [
+    {
+      "title": "High memory usage",
+      "action": "Investigate processes consuming memory."
+    }
+  ],
+  "listening_ports": [
+    {
+      "pid": 4912,
+      "local": ":::515"
+    },
+    {
+      "pid": 16656,
+      "local": "0.0.0.0:20271"
+    },
+    {
+      "pid": 1140,
+      "local": ":::49664"
+    },
+    {
+      "pid": 9024,
+      "local": "192.168.0.102:13200"
+    },
+    {
+      "pid": 22852,
+      "local": "::1:7679"
+    },
+    {
+      "pid": 14384,
+      "local": "127.0.0.1:21990"
+    },
+    {
+      "pid": 4900,
+      "local": "0.0.0.0:5000"
+    },
+    {
+      "pid": 1436,
+      "local": ":::135"
+    },
+    {
+      "pid": 1108,
+      "local": "0.0.0.0:49680"
+    },
+    {
+      "pid": 1104,
+      "local": "0.0.0.0:49668"
+    },
+    {
+      "pid": 4,
+      "local": ":::50128"
+    },
+    {
+      "pid": 4,
+      "local": "0.0.0.0:5357"
+    },
+    {
+      "pid": 4272,
+      "local": "0.0.0.0:49670"
+    },
+    {
+      "pid": 11672,
+      "local": "127.0.0.1:27015"
+    },
+    {
+      "pid": 3124,
+      "local": "0.0.0.0:49669"
+    },
+    {
+      "pid": 4912,
+      "local": "0.0.0.0:515"
+    },
+    {
+      "pid": 4520,
+      "local": ":::7070"
+    },
+    {
+      "pid": 14904,
+      "local": "0.0.0.0:8090"
+    },
+    {
+      "pid": 1436,
+      "local": "0.0.0.0:135"
+    },
+    {
+      "pid": 648,
+      "local": ":::49665"
+    },
+    {
+      "pid": 4,
+      "local": "0.0.0.0:445"
+    },
+    {
+      "pid": 9024,
+      "local": "127.0.0.1:13200"
+    },
+    {
+      "pid": 4824,
+      "local": "::1:49673"
+    },
+    {
+      "pid": 4,
+      "local": ":::5357"
+    },
+    {
+      "pid": 4,
+      "local": "127.0.0.1:1001"
+    },
+    {
+      "pid": 4520,
+      "local": "0.0.0.0:7070"
+    },
+    {
+      "pid": 1108,
+      "local": ":::49680"
+    },
+    {
+      "pid": 1140,
+      "local": "0.0.0.0:49664"
+    },
+    {
+      "pid": 3716,
+      "local": ":::7680"
+    },
+    {
+      "pid": 9024,
+      "local": "fe80::8d0a:2fda:217d:2c06:13200"
+    },
+    {
+      "pid": 15144,
+      "local": "0.0.0.0:54950"
+    },
+    {
+      "pid": 8352,
+      "local": "0.0.0.0:5040"
+    },
+    {
+      "pid": 9400,
+      "local": "0.0.0.0:12345"
+    },
+    {
+      "pid": 4272,
+      "local": ":::49670"
+    },
+    {
+      "pid": 1104,
+      "local": ":::49668"
+    },
+    {
+      "pid": 4,
+      "local": "0.0.0.0:50128"
+    },
+    {
+      "pid": 648,
+      "local": "0.0.0.0:49665"
+    },
+    {
+      "pid": 4,
+      "local": "192.168.0.102:139"
+    },
+    {
+      "pid": 4,
+      "local": ":::445"
+    },
+    {
+      "pid": 9024,
+      "local": "::1:13200"
+    },
+    {
+      "pid": 3124,
+      "local": ":::49669"
+    },
+    {
+      "pid": 3716,
+      "local": "0.0.0.0:7680"
+    },
+    {
+      "pid": 21320,
+      "local": "127.0.0.1:5354"
+    }
+  ],
+  "connections": [
+    {
+      "pid": 0,
+      "laddr": "127.0.0.1:62887",
+      "raddr": "127.0.0.1:5000",
+      "status": "TIME_WAIT"
+    },
+    {
+      "pid": 23200,
+      "laddr": "0.0.0.0:50062",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 0,
+      "laddr": "192.168.0.102:62896",
+      "raddr": "1.1.1.1:53",
+      "status": "TIME_WAIT"
+    },
+    {
+      "pid": 0,
+      "laddr": "192.168.0.102:62813",
+      "raddr": "104.18.32.47:443",
+      "status": "TIME_WAIT"
+    },
+    {
+      "pid": 0,
+      "laddr": "127.0.0.1:62899",
+      "raddr": "127.0.0.1:5000",
+      "status": "TIME_WAIT"
+    },
+    {
+      "pid": 23200,
+      "laddr": "0.0.0.0:54572",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 9024,
+      "laddr": "127.0.0.1:1136",
+      "raddr": "127.0.0.1:1137",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 23200,
+      "laddr": "0.0.0.0:63899",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 23200,
+      "laddr": "0.0.0.0:62880",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 5092,
+      "laddr": "::1:1900",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 2044,
+      "laddr": ":::5355",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 0,
+      "laddr": "127.0.0.1:62890",
+      "raddr": "127.0.0.1:5000",
+      "status": "TIME_WAIT"
+    },
+    {
+      "pid": 22852,
+      "laddr": "192.168.0.102:62617",
+      "raddr": "142.250.194.42:443",
+      "status": "CLOSE_WAIT"
+    },
+    {
+      "pid": 0,
+      "laddr": "127.0.0.1:62894",
+      "raddr": "127.0.0.1:5000",
+      "status": "TIME_WAIT"
+    },
+    {
+      "pid": 23200,
+      "laddr": "0.0.0.0:53023",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 23768,
+      "laddr": ":::5353",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 0,
+      "laddr": "192.168.0.102:62639",
+      "raddr": "104.18.32.47:443",
+      "status": "TIME_WAIT"
+    },
+    {
+      "pid": 0,
+      "laddr": "192.168.0.102:62874",
+      "raddr": "104.208.16.92:443",
+      "status": "TIME_WAIT"
+    },
+    {
+      "pid": 14384,
+      "laddr": "127.0.0.1:21990",
+      "raddr": "127.0.0.1:59839",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 9240,
+      "laddr": "192.168.0.102:62897",
+      "raddr": "140.82.112.21:443",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 23200,
+      "laddr": "0.0.0.0:49305",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 22776,
+      "laddr": "0.0.0.0:123",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 9024,
+      "laddr": "192.168.0.102:1900",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 14384,
+      "laddr": "127.0.0.1:21990",
+      "raddr": "127.0.0.1:59838",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 9024,
+      "laddr": "::1:13200",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 1920,
+      "laddr": "127.0.0.1:34919",
+      "raddr": "127.0.0.1:34920",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 21320,
+      "laddr": "::1:5353",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 0,
+      "laddr": "127.0.0.1:62893",
+      "raddr": "127.0.0.1:5000",
+      "status": "TIME_WAIT"
+    },
+    {
+      "pid": 11872,
+      "laddr": "127.0.0.1:52904",
+      "raddr": "127.0.0.1:52903",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 9024,
+      "laddr": "127.0.0.1:13200",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 15892,
+      "laddr": "0.0.0.0:35195",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 9240,
+      "laddr": "192.168.0.102:62881",
+      "raddr": "140.82.114.21:443",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 23200,
+      "laddr": "0.0.0.0:56860",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 0,
+      "laddr": "192.168.0.102:62862",
+      "raddr": "216.58.200.165:443",
+      "status": "TIME_WAIT"
+    },
+    {
+      "pid": 0,
+      "laddr": "127.0.0.1:62898",
+      "raddr": "127.0.0.1:5000",
+      "status": "TIME_WAIT"
+    },
+    {
+      "pid": 23200,
+      "laddr": "0.0.0.0:51412",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 2044,
+      "laddr": ":::5353",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 21320,
+      "laddr": "0.0.0.0:55455",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 23200,
+      "laddr": "0.0.0.0:56408",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 22852,
+      "laddr": "192.168.0.102:62795",
+      "raddr": "216.239.32.223:443",
+      "status": "CLOSE_WAIT"
+    },
+    {
+      "pid": 4272,
+      "laddr": "0.0.0.0:49665",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 21320,
+      "laddr": "0.0.0.0:53453",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 22852,
+      "laddr": "192.168.0.102:59808",
+      "raddr": "142.250.193.138:443",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 23200,
+      "laddr": "192.168.0.102:62103",
+      "raddr": "31.13.64.11:443",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 4,
+      "laddr": "192.168.0.102:137",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 23200,
+      "laddr": "192.168.0.102:62749",
+      "raddr": "31.13.64.18:443",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 23768,
+      "laddr": "0.0.0.0:5353",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 21320,
+      "laddr": "0.0.0.0:61490",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 2556,
+      "laddr": "0.0.0.0:54925",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 1560,
+      "laddr": "127.0.0.1:49676",
+      "raddr": "127.0.0.1:49677",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 4520,
+      "laddr": "0.0.0.0:50001",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 5332,
+      "laddr": ":::49673",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 23200,
+      "laddr": "0.0.0.0:55773",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 4,
+      "laddr": "192.168.0.102:138",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 5092,
+      "laddr": "192.168.0.102:1900",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 23200,
+      "laddr": "0.0.0.0:53626",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 5332,
+      "laddr": "0.0.0.0:3702",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 5092,
+      "laddr": "127.0.0.1:1900",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 21320,
+      "laddr": ":::53454",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 10412,
+      "laddr": "127.0.0.1:52943",
+      "raddr": "127.0.0.1:52942",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 4616,
+      "laddr": "127.0.0.1:34966",
+      "raddr": "127.0.0.1:34965",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 0,
+      "laddr": "127.0.0.1:62885",
+      "raddr": "127.0.0.1:5000",
+      "status": "TIME_WAIT"
+    },
+    {
+      "pid": 0,
+      "laddr": "192.168.0.102:62883",
+      "raddr": "104.208.16.92:443",
+      "status": "TIME_WAIT"
+    },
+    {
+      "pid": 23200,
+      "laddr": "192.168.0.102:62099",
+      "raddr": "31.13.64.11:443",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 9024,
+      "laddr": "192.168.0.102:13200",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 4900,
+      "laddr": "127.0.0.1:5000",
+      "raddr": "127.0.0.1:62900",
+      "status": "CLOSE_WAIT"
+    },
+    {
+      "pid": 23200,
+      "laddr": "192.168.0.102:59843",
+      "raddr": "74.125.130.188:443",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 8352,
+      "laddr": "0.0.0.0:5050",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 2044,
+      "laddr": "0.0.0.0:5353",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 11672,
+      "laddr": "127.0.0.1:50147",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 0,
+      "laddr": "127.0.0.1:62888",
+      "raddr": "127.0.0.1:5000",
+      "status": "TIME_WAIT"
+    },
+    {
+      "pid": 0,
+      "laddr": "192.168.0.102:62845",
+      "raddr": "216.58.200.165:443",
+      "status": "TIME_WAIT"
+    },
+    {
+      "pid": 12172,
+      "laddr": "fe80::8d0a:2fda:217d:2c06:2177",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 4900,
+      "laddr": "127.0.0.1:5000",
+      "raddr": "127.0.0.1:62889",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 23200,
+      "laddr": "192.168.0.102:61856",
+      "raddr": "31.13.64.18:443",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 23200,
+      "laddr": "192.168.0.102:62474",
+      "raddr": "57.144.141.32:5222",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 23200,
+      "laddr": "127.0.0.1:62900",
+      "raddr": "127.0.0.1:5000",
+      "status": "FIN_WAIT2"
+    },
+    {
+      "pid": 5092,
+      "laddr": "127.0.0.1:53432",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 4272,
+      "laddr": ":::61345",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 22852,
+      "laddr": "192.168.0.102:62710",
+      "raddr": "142.250.194.42:443",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 9024,
+      "laddr": "127.0.0.1:1137",
+      "raddr": "127.0.0.1:1136",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 9024,
+      "laddr": "0.0.0.0:6771",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 23200,
+      "laddr": "0.0.0.0:59063",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 0,
+      "laddr": "192.168.0.102:62842",
+      "raddr": "34.110.196.231:443",
+      "status": "TIME_WAIT"
+    },
+    {
+      "pid": 9024,
+      "laddr": "192.168.0.102:64373",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 23200,
+      "laddr": "192.168.0.102:62101",
+      "raddr": "57.144.140.141:443",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 23200,
+      "laddr": "192.168.0.102:62444",
+      "raddr": "142.250.4.188:5228",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 23200,
+      "laddr": "127.0.0.1:59839",
+      "raddr": "127.0.0.1:21990",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 10412,
+      "laddr": "127.0.0.1:52942",
+      "raddr": "127.0.0.1:52943",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 21320,
+      "laddr": "192.168.0.102:5353",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 23200,
+      "laddr": ":::5353",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 5092,
+      "laddr": "192.168.0.102:53431",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 5332,
+      "laddr": ":::3702",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 0,
+      "laddr": "127.0.0.1:62886",
+      "raddr": "127.0.0.1:5000",
+      "status": "TIME_WAIT"
+    },
+    {
+      "pid": 11672,
+      "laddr": "127.0.0.1:50146",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 23200,
+      "laddr": "0.0.0.0:60419",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 23200,
+      "laddr": "0.0.0.0:51244",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 23200,
+      "laddr": "0.0.0.0:60731",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 14384,
+      "laddr": "127.0.0.1:21990",
+      "raddr": "127.0.0.1:62437",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 23200,
+      "laddr": "127.0.0.1:62437",
+      "raddr": "127.0.0.1:21990",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 9024,
+      "laddr": "192.168.0.102:64374",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 21320,
+      "laddr": "0.0.0.0:57507",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 1920,
+      "laddr": "127.0.0.1:34920",
+      "raddr": "127.0.0.1:34919",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 0,
+      "laddr": "127.0.0.1:62895",
+      "raddr": "127.0.0.1:5000",
+      "status": "TIME_WAIT"
+    },
+    {
+      "pid": 23200,
+      "laddr": "0.0.0.0:64314",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 15144,
+      "laddr": "0.0.0.0:54955",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 9024,
+      "laddr": ":::6771",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 5320,
+      "laddr": "192.168.0.102:49524",
+      "raddr": "4.213.25.240:443",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 3796,
+      "laddr": "127.0.0.1:49664",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 11872,
+      "laddr": "127.0.0.1:52903",
+      "raddr": "127.0.0.1:52904",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 22776,
+      "laddr": ":::123",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 5332,
+      "laddr": "0.0.0.0:49672",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 23200,
+      "laddr": "0.0.0.0:64557",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 4616,
+      "laddr": "127.0.0.1:34965",
+      "raddr": "127.0.0.1:34966",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 12172,
+      "laddr": "192.168.0.102:2177",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 5092,
+      "laddr": "fe80::8d0a:2fda:217d:2c06:1900",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 23200,
+      "laddr": "0.0.0.0:5353",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 9240,
+      "laddr": "192.168.0.102:62872",
+      "raddr": "20.250.119.64:443",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 23200,
+      "laddr": "0.0.0.0:56149",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 21320,
+      "laddr": "0.0.0.0:59381",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 23200,
+      "laddr": "192.168.0.102:62095",
+      "raddr": "57.144.140.141:443",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 4520,
+      "laddr": "192.168.0.102:59809",
+      "raddr": "148.113.20.115:443",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 23200,
+      "laddr": "192.168.0.102:59841",
+      "raddr": "74.125.130.188:443",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 23200,
+      "laddr": "192.168.0.102:61836",
+      "raddr": "31.13.64.11:443",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 23200,
+      "laddr": "127.0.0.1:62889",
+      "raddr": "127.0.0.1:5000",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 2044,
+      "laddr": "0.0.0.0:5355",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 23200,
+      "laddr": "192.168.0.102:62102",
+      "raddr": "57.144.141.134:443",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 5092,
+      "laddr": "fe80::8d0a:2fda:217d:2c06:53429",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 23200,
+      "laddr": "127.0.0.1:59838",
+      "raddr": "127.0.0.1:21990",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 9024,
+      "laddr": "fe80::8d0a:2fda:217d:2c06:13200",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 23200,
+      "laddr": "192.168.0.102:62104",
+      "raddr": "57.144.140.141:443",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 1560,
+      "laddr": "127.0.0.1:49677",
+      "raddr": "127.0.0.1:49676",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 0,
+      "laddr": "192.168.0.102:62847",
+      "raddr": "104.18.41.158:443",
+      "status": "TIME_WAIT"
+    },
+    {
+      "pid": 23200,
+      "laddr": "192.168.0.102:61835",
+      "raddr": "31.13.64.11:443",
+      "status": "ESTABLISHED"
+    },
+    {
+      "pid": 21320,
+      "laddr": "0.0.0.0:63661",
+      "raddr": "",
+      "status": "NONE"
+    },
+    {
+      "pid": 5092,
+      "laddr": "::1:53430",
+      "raddr": "",
+      "status": "NONE"
+    }
+  ],
+  "services_snapshot": [
+    {
+      "name": "ADPSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "ALG",
+      "status": "stopped"
+    },
+    {
+      "name": "AnyDesk",
+      "status": "running"
+    },
+    {
+      "name": "AppIDSvc",
+      "status": "running"
+    },
+    {
+      "name": "Appinfo",
+      "status": "running"
+    },
+    {
+      "name": "AppMgmt",
+      "status": "stopped"
+    },
+    {
+      "name": "AppReadiness",
+      "status": "stopped"
+    },
+    {
+      "name": "AppVClient",
+      "status": "stopped"
+    },
+    {
+      "name": "AppXSvc",
+      "status": "running"
+    },
+    {
+      "name": "ApxSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "AssignedAccessManagerSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "AudioEndpointBuilder",
+      "status": "running"
+    },
+    {
+      "name": "Audiosrv",
+      "status": "running"
+    },
+    {
+      "name": "autotimesvc",
+      "status": "stopped"
+    },
+    {
+      "name": "AxInstSV",
+      "status": "stopped"
+    },
+    {
+      "name": "BDESVC",
+      "status": "running"
+    },
+    {
+      "name": "BFE",
+      "status": "running"
+    },
+    {
+      "name": "BITS",
+      "status": "stopped"
+    },
+    {
+      "name": "BrokerInfrastructure",
+      "status": "running"
+    },
+    {
+      "name": "Browser",
+      "status": "stopped"
+    },
+    {
+      "name": "BTAGService",
+      "status": "running"
+    },
+    {
+      "name": "BthAvctpSvc",
+      "status": "running"
+    },
+    {
+      "name": "bthserv",
+      "status": "running"
+    },
+    {
+      "name": "camsvc",
+      "status": "running"
+    },
+    {
+      "name": "CDPSvc",
+      "status": "running"
+    },
+    {
+      "name": "CertPropSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "ClickToRunSvc",
+      "status": "running"
+    },
+    {
+      "name": "ClipSVC",
+      "status": "stopped"
+    },
+    {
+      "name": "cloudidsvc",
+      "status": "stopped"
+    },
+    {
+      "name": "COMSysApp",
+      "status": "stopped"
+    },
+    {
+      "name": "CoreMessagingRegistrar",
+      "status": "running"
+    },
+    {
+      "name": "cplspcon",
+      "status": "running"
+    },
+    {
+      "name": "CryptSvc",
+      "status": "running"
+    },
+    {
+      "name": "CscService",
+      "status": "stopped"
+    },
+    {
+      "name": "DcomLaunch",
+      "status": "running"
+    },
+    {
+      "name": "dcsvc",
+      "status": "stopped"
+    },
+    {
+      "name": "defragsvc",
+      "status": "stopped"
+    },
+    {
+      "name": "DeviceAssociationService",
+      "status": "running"
+    },
+    {
+      "name": "DeviceInstall",
+      "status": "stopped"
+    },
+    {
+      "name": "DevQueryBroker",
+      "status": "running"
+    },
+    {
+      "name": "Dhcp",
+      "status": "running"
+    },
+    {
+      "name": "diagsvc",
+      "status": "stopped"
+    },
+    {
+      "name": "DiagTrack",
+      "status": "running"
+    },
+    {
+      "name": "DialogBlockingService",
+      "status": "stopped"
+    },
+    {
+      "name": "DispBrokerDesktopSvc",
+      "status": "running"
+    },
+    {
+      "name": "DisplayEnhancementService",
+      "status": "running"
+    },
+    {
+      "name": "DmEnrollmentSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "dmwappushservice",
+      "status": "stopped"
+    },
+    {
+      "name": "Dnscache",
+      "status": "running"
+    },
+    {
+      "name": "DolbyDAXAPI",
+      "status": "running"
+    },
+    {
+      "name": "DoSvc",
+      "status": "running"
+    },
+    {
+      "name": "dot3svc",
+      "status": "stopped"
+    },
+    {
+      "name": "DPS",
+      "status": "running"
+    },
+    {
+      "name": "dptftcs",
+      "status": "running"
+    },
+    {
+      "name": "DsmSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "DsSvc",
+      "status": "running"
+    },
+    {
+      "name": "DusmSvc",
+      "status": "running"
+    },
+    {
+      "name": "EapHost",
+      "status": "stopped"
+    },
+    {
+      "name": "edgeupdate",
+      "status": "stopped"
+    },
+    {
+      "name": "edgeupdatem",
+      "status": "stopped"
+    },
+    {
+      "name": "EFS",
+      "status": "stopped"
+    },
+    {
+      "name": "ElevocService",
+      "status": "running"
+    },
+    {
+      "name": "embeddedmode",
+      "status": "stopped"
+    },
+    {
+      "name": "EntAppSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "EventLog",
+      "status": "running"
+    },
+    {
+      "name": "EventSystem",
+      "status": "running"
+    },
+    {
+      "name": "fdPHost",
+      "status": "running"
+    },
+    {
+      "name": "FDResPub",
+      "status": "running"
+    },
+    {
+      "name": "fhsvc",
+      "status": "stopped"
+    },
+    {
+      "name": "FontCache",
+      "status": "running"
+    },
+    {
+      "name": "FontCache3.0.0.0",
+      "status": "stopped"
+    },
+    {
+      "name": "FrameServer",
+      "status": "stopped"
+    },
+    {
+      "name": "FrameServerMonitor",
+      "status": "stopped"
+    },
+    {
+      "name": "GameInputSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "GoogleChromeElevationService",
+      "status": "stopped"
+    },
+    {
+      "name": "GoogleUpdaterInternalService140.0.7273.0",
+      "status": "stopped"
+    },
+    {
+      "name": "GoogleUpdaterService140.0.7273.0",
+      "status": "stopped"
+    },
+    {
+      "name": "gpsvc",
+      "status": "running"
+    },
+    {
+      "name": "GraphicsPerfSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "hidserv",
+      "status": "running"
+    },
+    {
+      "name": "hpatchmon",
+      "status": "stopped"
+    },
+    {
+      "name": "HvHost",
+      "status": "running"
+    },
+    {
+      "name": "icssvc",
+      "status": "stopped"
+    },
+    {
+      "name": "igccservice",
+      "status": "running"
+    },
+    {
+      "name": "IKEEXT",
+      "status": "stopped"
+    },
+    {
+      "name": "InstallService",
+      "status": "running"
+    },
+    {
+      "name": "Intel(R) Platform License Manager Service",
+      "status": "stopped"
+    },
+    {
+      "name": "IntelAudioService",
+      "status": "running"
+    },
+    {
+      "name": "InventorySvc",
+      "status": "running"
+    },
+    {
+      "name": "ipfsvc",
+      "status": "running"
+    },
+    {
+      "name": "iphlpsvc",
+      "status": "running"
+    },
+    {
+      "name": "IpxlatCfgSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "jhi_service",
+      "status": "running"
+    },
+    {
+      "name": "KeyIso",
+      "status": "running"
+    },
+    {
+      "name": "KtmRm",
+      "status": "stopped"
+    },
+    {
+      "name": "LanmanServer",
+      "status": "running"
+    },
+    {
+      "name": "LanmanWorkstation",
+      "status": "running"
+    },
+    {
+      "name": "LenovoFnAndFunctionKeys",
+      "status": "running"
+    },
+    {
+      "name": "lfsvc",
+      "status": "running"
+    },
+    {
+      "name": "LicenseManager",
+      "status": "running"
+    },
+    {
+      "name": "LITSSVC",
+      "status": "running"
+    },
+    {
+      "name": "lltdsvc",
+      "status": "stopped"
+    },
+    {
+      "name": "lmhosts",
+      "status": "running"
+    },
+    {
+      "name": "LocalKdc",
+      "status": "stopped"
+    },
+    {
+      "name": "LPDSVC",
+      "status": "running"
+    },
+    {
+      "name": "LSM",
+      "status": "running"
+    },
+    {
+      "name": "LxpSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "MapsBroker",
+      "status": "stopped"
+    },
+    {
+      "name": "McmSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "McpManagementService",
+      "status": "stopped"
+    },
+    {
+      "name": "MDCoreSvc",
+      "status": "running"
+    },
+    {
+      "name": "MicrosoftEdgeElevationService",
+      "status": "stopped"
+    },
+    {
+      "name": "mpssvc",
+      "status": "running"
+    },
+    {
+      "name": "MSDTC",
+      "status": "stopped"
+    },
+    {
+      "name": "MSiSCSI",
+      "status": "stopped"
+    },
+    {
+      "name": "msiserver",
+      "status": "stopped"
+    },
+    {
+      "name": "MsKeyboardFilter",
+      "status": "stopped"
+    },
+    {
+      "name": "NativePushService",
+      "status": "running"
+    },
+    {
+      "name": "NaturalAuthentication",
+      "status": "stopped"
+    },
+    {
+      "name": "NcaSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "NcbService",
+      "status": "running"
+    },
+    {
+      "name": "NcdAutoSetup",
+      "status": "stopped"
+    },
+    {
+      "name": "Netlogon",
+      "status": "stopped"
+    },
+    {
+      "name": "Netman",
+      "status": "running"
+    },
+    {
+      "name": "netprofm",
+      "status": "running"
+    },
+    {
+      "name": "NetSetupSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "NetTcpPortSharing",
+      "status": "stopped"
+    },
+    {
+      "name": "NgcCtnrSvc",
+      "status": "running"
+    },
+    {
+      "name": "NgcSvc",
+      "status": "running"
+    },
+    {
+      "name": "NlaSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "nsi",
+      "status": "running"
+    },
+    {
+      "name": "PcaSvc",
+      "status": "running"
+    },
+    {
+      "name": "PeerDistSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "perceptionsimulation",
+      "status": "stopped"
+    },
+    {
+      "name": "PerfHost",
+      "status": "stopped"
+    },
+    {
+      "name": "PhoneSvc",
+      "status": "running"
+    },
+    {
+      "name": "pla",
+      "status": "stopped"
+    },
+    {
+      "name": "PlugPlay",
+      "status": "running"
+    },
+    {
+      "name": "PolicyAgent",
+      "status": "running"
+    },
+    {
+      "name": "Power",
+      "status": "running"
+    },
+    {
+      "name": "PrintDeviceConfigurationService",
+      "status": "stopped"
+    },
+    {
+      "name": "PrintNotify",
+      "status": "stopped"
+    },
+    {
+      "name": "PrintScanBrokerService",
+      "status": "stopped"
+    },
+    {
+      "name": "ProfSvc",
+      "status": "running"
+    },
+    {
+      "name": "PushToInstall",
+      "status": "stopped"
+    },
+    {
+      "name": "QWAVE",
+      "status": "running"
+    },
+    {
+      "name": "RasAuto",
+      "status": "stopped"
+    },
+    {
+      "name": "RasMan",
+      "status": "running"
+    },
+    {
+      "name": "refsdedupsvc",
+      "status": "stopped"
+    },
+    {
+      "name": "RemoteAccess",
+      "status": "stopped"
+    },
+    {
+      "name": "RemoteRegistry",
+      "status": "stopped"
+    },
+    {
+      "name": "RetailDemo",
+      "status": "stopped"
+    },
+    {
+      "name": "RmSvc",
+      "status": "running"
+    },
+    {
+      "name": "RpcEptMapper",
+      "status": "running"
+    },
+    {
+      "name": "RpcLocator",
+      "status": "stopped"
+    },
+    {
+      "name": "RpcSs",
+      "status": "running"
+    },
+    {
+      "name": "RtkAudioUniversalService",
+      "status": "running"
+    },
+    {
+      "name": "SamSs",
+      "status": "running"
+    },
+    {
+      "name": "SCardSvr",
+      "status": "stopped"
+    },
+    {
+      "name": "ScDeviceEnum",
+      "status": "stopped"
+    },
+    {
+      "name": "Schedule",
+      "status": "running"
+    },
+    {
+      "name": "SCPolicySvc",
+      "status": "stopped"
+    },
+    {
+      "name": "SDRSVC",
+      "status": "running"
+    },
+    {
+      "name": "seclogon",
+      "status": "running"
+    },
+    {
+      "name": "SecurityHealthService",
+      "status": "running"
+    },
+    {
+      "name": "SEMgrSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "SENS",
+      "status": "running"
+    },
+    {
+      "name": "Sense",
+      "status": "stopped"
+    },
+    {
+      "name": "SensorDataService",
+      "status": "stopped"
+    },
+    {
+      "name": "SensorService",
+      "status": "running"
+    },
+    {
+      "name": "SensrSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "SessionEnv",
+      "status": "stopped"
+    },
+    {
+      "name": "SharedAccess",
+      "status": "stopped"
+    },
+    {
+      "name": "ShellHWDetection",
+      "status": "running"
+    },
+    {
+      "name": "shpamsvc",
+      "status": "stopped"
+    },
+    {
+      "name": "smphost",
+      "status": "stopped"
+    },
+    {
+      "name": "SmsRouter",
+      "status": "stopped"
+    },
+    {
+      "name": "SNMPTrap",
+      "status": "stopped"
+    },
+    {
+      "name": "Spooler",
+      "status": "running"
+    },
+    {
+      "name": "sppsvc",
+      "status": "stopped"
+    },
+    {
+      "name": "SSDPSRV",
+      "status": "running"
+    },
+    {
+      "name": "ssh-agent",
+      "status": "stopped"
+    },
+    {
+      "name": "SstpSvc",
+      "status": "running"
+    },
+    {
+      "name": "StateRepository",
+      "status": "running"
+    },
+    {
+      "name": "StiSvc",
+      "status": "running"
+    },
+    {
+      "name": "StorSvc",
+      "status": "running"
+    },
+    {
+      "name": "SUService",
+      "status": "stopped"
+    },
+    {
+      "name": "svsvc",
+      "status": "stopped"
+    },
+    {
+      "name": "swprv",
+      "status": "stopped"
+    },
+    {
+      "name": "SysMain",
+      "status": "running"
+    },
+    {
+      "name": "SystemEventsBroker",
+      "status": "running"
+    },
+    {
+      "name": "TapiSrv",
+      "status": "running"
+    },
+    {
+      "name": "TermService",
+      "status": "stopped"
+    },
+    {
+      "name": "TextInputManagementService",
+      "status": "running"
+    },
+    {
+      "name": "Themes",
+      "status": "running"
+    },
+    {
+      "name": "TieringEngineService",
+      "status": "stopped"
+    },
+    {
+      "name": "TimeBrokerSvc",
+      "status": "running"
+    },
+    {
+      "name": "TokenBroker",
+      "status": "running"
+    },
+    {
+      "name": "TrkWks",
+      "status": "running"
+    },
+    {
+      "name": "TroubleshootingSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "TrustedInstaller",
+      "status": "stopped"
+    },
+    {
+      "name": "tzautoupdate",
+      "status": "stopped"
+    },
+    {
+      "name": "UevAgentService",
+      "status": "stopped"
+    },
+    {
+      "name": "UmRdpService",
+      "status": "stopped"
+    },
+    {
+      "name": "upnphost",
+      "status": "running"
+    },
+    {
+      "name": "UserManager",
+      "status": "running"
+    },
+    {
+      "name": "UsoSvc",
+      "status": "running"
+    },
+    {
+      "name": "VaultSvc",
+      "status": "running"
+    },
+    {
+      "name": "vds",
+      "status": "stopped"
+    },
+    {
+      "name": "vmicguestinterface",
+      "status": "stopped"
+    },
+    {
+      "name": "vmicheartbeat",
+      "status": "stopped"
+    },
+    {
+      "name": "vmickvpexchange",
+      "status": "stopped"
+    },
+    {
+      "name": "vmicrdv",
+      "status": "stopped"
+    },
+    {
+      "name": "vmicshutdown",
+      "status": "stopped"
+    },
+    {
+      "name": "vmictimesync",
+      "status": "stopped"
+    },
+    {
+      "name": "vmicvmsession",
+      "status": "stopped"
+    },
+    {
+      "name": "vmicvss",
+      "status": "stopped"
+    },
+    {
+      "name": "VSInstallerElevationService",
+      "status": "stopped"
+    },
+    {
+      "name": "VSS",
+      "status": "stopped"
+    },
+    {
+      "name": "W32Time",
+      "status": "running"
+    },
+    {
+      "name": "WaaSMedicSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "WalletService",
+      "status": "stopped"
+    },
+    {
+      "name": "WarpJITSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "wbengine",
+      "status": "stopped"
+    },
+    {
+      "name": "WbioSrvc",
+      "status": "stopped"
+    },
+    {
+      "name": "Wcmsvc",
+      "status": "running"
+    },
+    {
+      "name": "wcncsvc",
+      "status": "stopped"
+    },
+    {
+      "name": "WdiServiceHost",
+      "status": "running"
+    },
+    {
+      "name": "WdiSystemHost",
+      "status": "running"
+    },
+    {
+      "name": "WdNisSvc",
+      "status": "running"
+    },
+    {
+      "name": "WebClient",
+      "status": "running"
+    },
+    {
+      "name": "webthreatdefsvc",
+      "status": "running"
+    },
+    {
+      "name": "Wecsvc",
+      "status": "stopped"
+    },
+    {
+      "name": "WEPHOSTSVC",
+      "status": "stopped"
+    },
+    {
+      "name": "wercplsupport",
+      "status": "stopped"
+    },
+    {
+      "name": "WerSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "WFDSConMgrSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "whesvc",
+      "status": "running"
+    },
+    {
+      "name": "WiaRpc",
+      "status": "stopped"
+    },
+    {
+      "name": "WinDefend",
+      "status": "running"
+    },
+    {
+      "name": "WinHttpAutoProxySvc",
+      "status": "running"
+    },
+    {
+      "name": "Winmgmt",
+      "status": "running"
+    },
+    {
+      "name": "WinRM",
+      "status": "stopped"
+    },
+    {
+      "name": "wisvc",
+      "status": "stopped"
+    },
+    {
+      "name": "WlanSvc",
+      "status": "running"
+    },
+    {
+      "name": "wlidsvc",
+      "status": "stopped"
+    },
+    {
+      "name": "wlpasvc",
+      "status": "stopped"
+    },
+    {
+      "name": "WManSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "wmiApSrv",
+      "status": "stopped"
+    },
+    {
+      "name": "WMIRegistrationService",
+      "status": "running"
+    },
+    {
+      "name": "WMPNetworkSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "WondersharePDFelement11DispatchService",
+      "status": "stopped"
+    },
+    {
+      "name": "workfolderssvc",
+      "status": "stopped"
+    },
+    {
+      "name": "WpcMonSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "WPDBusEnum",
+      "status": "stopped"
+    },
+    {
+      "name": "WpnService",
+      "status": "running"
+    },
+    {
+      "name": "WSAIFabricSvc",
+      "status": "running"
+    },
+    {
+      "name": "wscsvc",
+      "status": "running"
+    },
+    {
+      "name": "WSearch",
+      "status": "running"
+    },
+    {
+      "name": "wuauserv",
+      "status": "stopped"
+    },
+    {
+      "name": "WwanSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "XblAuthManager",
+      "status": "stopped"
+    },
+    {
+      "name": "XblGameSave",
+      "status": "stopped"
+    },
+    {
+      "name": "XboxGipSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "XboxNetApiSvc",
+      "status": "stopped"
+    },
+    {
+      "name": "AarSvc_67b1b",
+      "status": "stopped"
+    },
+    {
+      "name": "BcastDVRUserService_67b1b",
+      "status": "stopped"
+    },
+    {
+      "name": "BluetoothUserService_67b1b",
+      "status": "running"
+    },
+    {
+      "name": "CaptureService_67b1b",
+      "status": "stopped"
+    },
+    {
+      "name": "cbdhsvc_67b1b",
+      "status": "running"
+    },
+    {
+      "name": "CDPUserSvc_67b1b",
+      "status": "running"
+    },
+    {
+      "name": "CloudBackupRestoreSvc_67b1b",
+      "status": "stopped"
+    },
+    {
+      "name": "ConsentUxUserSvc_67b1b",
+      "status": "stopped"
+    },
+    {
+      "name": "CredentialEnrollmentManagerUserSvc_67b1b",
+      "status": "stopped"
+    },
+    {
+      "name": "DeviceAssociationBrokerSvc_67b1b",
+      "status": "stopped"
+    },
+    {
+      "name": "DevicePickerUserSvc_67b1b",
+      "status": "stopped"
+    },
+    {
+      "name": "DevicesFlowUserSvc_67b1b",
+      "status": "running"
+    },
+    {
+      "name": "MessagingService_67b1b",
+      "status": "stopped"
+    },
+    {
+      "name": "NPSMSvc_67b1b",
+      "status": "running"
+    },
+    {
+      "name": "OneSyncSvc_67b1b",
+      "status": "running"
+    },
+    {
+      "name": "P9RdrService_67b1b",
+      "status": "stopped"
+    },
+    {
+      "name": "PenService_67b1b",
+      "status": "stopped"
+    },
+    {
+      "name": "PimIndexMaintenanceSvc_67b1b",
+      "status": "running"
+    },
+    {
+      "name": "PrintWorkflowUserSvc_67b1b",
+      "status": "stopped"
+    },
+    {
+      "name": "UdkUserSvc_67b1b",
+      "status": "running"
+    },
+    {
+      "name": "UnistoreSvc_67b1b",
+      "status": "running"
+    },
+    {
+      "name": "UserDataSvc_67b1b",
+      "status": "running"
+    },
+    {
+      "name": "webthreatdefusersvc_67b1b",
+      "status": "running"
+    },
+    {
+      "name": "WpnUserService_67b1b",
+      "status": "running"
+    },
+    {
+      "name": "WorkflowAppControl",
+      "status": "running"
+    },
+    {
+      "name": "USBAppControl",
+      "status": "running"
+    },
+    {
+      "name": "BrYNSvc",
+      "status": "running"
+    },
+    {
+      "name": "Bonjour Service",
+      "status": "running"
+    },
+    {
+      "name": "Apple Mobile Device Service",
+      "status": "running"
+    },
+    {
+      "name": "Wondershare InstallAssist",
+      "status": "running"
+    },
+    {
+      "name": "DFWSIDService",
+      "status": "running"
+    },
+    {
+      "name": "ElevationService",
+      "status": "running"
+    },
+    {
+      "name": "WirelessBackupService",
+      "status": "stopped"
+    },
+    {
+      "name": "clr_optimization_v2.0.50727_32",
+      "status": "stopped"
+    },
+    {
+      "name": "WsDrvInst",
+      "status": "stopped"
+    }
+  ],
+  "vulnerabilities": [
+    {
+      "name": "java present",
+      "severity": "warn",
+      "note": "Confirm Java version is up-to-date"
+    }
+  ],
+  "logs_snippet": "Log collection failed: No module named 'win32evtlog'",
+  "collected_at": "2025-08-08T23:36:50.380924"
+}

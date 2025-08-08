@@ -1,29 +1,75 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>IT Health Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="{{ url_for('static', filename='dashboard.js') }}" defer></script>
+  <meta charset="utf-8">
+  <title>IT Health Dashboard</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 </head>
 <body>
-    <h1>IT Health Check - Multi Host Overview</h1>
-    <div class="cards">
-        <div class="card">Total Hosts: {{ data.totalHosts }}</div>
-        <div class="card critical">Critical: {{ data.critical }}</div>
-        <div class="card warning">Warning: {{ data.warning }}</div>
-        <div class="card healthy">Healthy: {{ data.healthy }}</div>
+  <header>
+    <div class="brand">
+      <h1>IT Health Check</h1>
+      <p class="subtitle">Local scanner • Real-time dashboard • Full / Partial scans</p>
     </div>
+    <div class="controls">
+      <button id="btnPartial" class="btn">Run Partial Scan</button>
+      <button id="btnFull" class="btn primary">Run Full Scan</button>
+      <div id="statusBadge" class="badge">Idle</div>
+    </div>
+  </header>
 
-    <canvas id="categoryChart"></canvas>
-    <canvas id="trendChart"></canvas>
+  <main>
+    <section class="kpiRow">
+      <div class="kpi card">
+        <div class="kpi-title">Host</div>
+        <div id="hostName" class="kpi-value">—</div>
+      </div>
+      <div class="kpi card">
+        <div class="kpi-title">IP</div>
+        <div id="hostIP" class="kpi-value">—</div>
+      </div>
+      <div class="kpi card">
+        <div class="kpi-title">Score</div>
+        <div id="healthScore" class="kpi-value">—</div>
+      </div>
+      <div class="kpi card">
+        <div class="kpi-title">Network</div>
+        <div id="netState" class="kpi-value">—</div>
+      </div>
+    </section>
 
-    <h2>Logs</h2>
-    <ul>
-        {% for log in data.logs %}
-        <li>{{ log }}</li>
-        {% endfor %}
-    </ul>
+    <section class="charts">
+      <div class="card chartCard">
+        <h3>CPU Usage</h3>
+        <canvas id="cpuChart"></canvas>
+      </div>
+      <div class="card chartCard">
+        <h3>Memory Usage</h3>
+        <canvas id="memChart"></canvas>
+      </div>
+      <div class="card chartCard full">
+        <h3>Disk Usage</h3>
+        <canvas id="diskChart"></canvas>
+      </div>
+    </section>
+
+    <section class="logs card">
+      <h3>Live Terminal Logs</h3>
+      <pre id="logArea" class="logTerminal" aria-live="polite"></pre>
+    </section>
+
+    <section class="remediations card">
+      <h3>Suggested Remediations</h3>
+      <ul id="remList"></ul>
+    </section>
+  </main>
+
+  <footer>
+    <small>© IT Health Check — Ahmad</small>
+  </footer>
+
+<script src="/static/dashboard.js" defer></script>
 </body>
 </html>

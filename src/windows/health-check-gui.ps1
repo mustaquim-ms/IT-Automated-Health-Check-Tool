@@ -1,72 +1,67 @@
-Add-Type -AssemblyName System.Windows.Forms
-Add-Type -AssemblyName System.Drawing
+Add-Type -AssemblyName PresentationFramework
 
-$form = New-Object System.Windows.Forms.Form
-$form.Text = "IT Health Check GUI"
-$form.Size = New-Object System.Drawing.Size(400,300)
-$form.StartPosition = "CenterScreen"
+$scriptPath = Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) 'health-check.ps1'
+$agg = "http://127.0.0.1:5000/upload"
 
-$label = New-Object System.Windows.Forms.Label
-$label.Text = "Enter Hostname(s) (comma-separated):"
-$label.AutoSize = $true
-$label.Location = New-Object System.Drawing.Point(10,20)
-$form.Controls.Add($label)
+# Build simple WPF window
+[xml]$xaml = @"
+<Window xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' Title='IT Health GUI' Height='420' Width='700'>
+  <Grid Margin='10'>
+    <Grid.RowDefinitions>
+      <RowDefinition Height='Auto'/>
+      <RowDefinition Height='*'/>
+      <RowDefinition Height='Auto'/>
+    </Grid.RowDefinitions>
 
-$textBox = New-Object System.Windows.Forms.TextBox
-$textBox.Size = New-Object System.Drawing.Size(250,20)
-$textBox.Location = New-Object System.Drawing.Point(10,50)
-$form.Controls.Add($textBox)
+    <StackPanel Orientation='Horizontal' Grid.Row='0' Margin='0,0,0,8'>
+      <Button Name='RunBtn' Width='160' Margin='0,0,8,0'>Run Elevated Health Check</Button>
+      <Button Name='OpenReports' Width='160'>Open Reports Folder</Button>
+      <Label VerticalAlignment='Center' Margin='12,0,0,0'>Aggregator:</Label>
+      <TextBox Name='AggUrl' Width='300' Margin='8,0,0,0'/>
+    </StackPanel>
 
-$runButton = New-Object System.Windows.Forms.Button
-$runButton.Text = "Run Health Check"
-$runButton.Location = New-Object System.Drawing.Point(10,90)
-$form.Controls.Add($runButton)
+    <TextBox Name='OutputBox' Grid.Row='1' TextWrapping='Wrap' VerticalScrollBarVisibility='Auto' AcceptsReturn='True' IsReadOnly='True'/>
 
-$outputBox = New-Object System.Windows.Forms.TextBox
-$outputBox.Multiline = $true
-$outputBox.ScrollBars = "Vertical"
-$outputBox.Size = New-Object System.Drawing.Size(350,100)
-$outputBox.Location = New-Object System.Drawing.Point(10,130)
-$form.Controls.Add($outputBox)
+    <StackPanel Orientation='Horizontal' Grid.Row='2' HorizontalAlignment='Right' Margin='0,8,0,0'>
+      <Button Name='CloseBtn' Width='100'>Close</Button>
+    </StackPanel>
+  </Grid>
+</Window>
+"@
 
-function Run-HealthCheck {
-    param($Hosts)
-    $results = @()
+$reader = (New-Object System.Xml.XmlNodeReader $xaml)
+$win = [Windows.Markup.XamlReader]::Load($reader)
 
-    foreach ($host in $Hosts) {
-        $cpu = Get-Counter "\Processor(_Total)\% Processor Time" -SampleInterval 1 -MaxSamples 1 |
-               Select-Object -ExpandProperty CounterSamples |
-               Select-Object -ExpandProperty CookedValue
-        $mem = (Get-WmiObject Win32_OperatingSystem).FreePhysicalMemory / 1MB
-        $disk = (Get-PSDrive C).Free / 1GB
+$RunBtn = $win.FindName("RunBtn")
+$OpenReports = $win.FindName("OpenReports")
+$AggUrl = $win.FindName("AggUrl")
+$OutputBox = $win.FindName("OutputBox")
+$CloseBtn = $win.FindName("CloseBtn")
 
-        $status = "Healthy"
-        if ($cpu -gt 80) { $status = "Critical" }
-        elseif ($cpu -gt 60) { $status = "Warning" }
+$AggUrl.Text = "http://127.0.0.1:5000/upload"
 
-        $results += [PSCustomObject]@{
-            Hostname = $host
-            CPU = [math]::Round($cpu, 2)
-            MemoryGB = [math]::Round($mem, 2)
-            DiskGB = [math]::Round($disk, 2)
-            Status = $status
-            Timestamp = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
-        }
-    }
+function Append($s){ $OutputBox.AppendText((Get-Date).ToString('s') + " - " + $s + "`r`n"); $OutputBox.ScrollToEnd() }
 
-    $json = $results | ConvertTo-Json -Depth 3
-    $fileName = "$env:USERPROFILE\health_report_$((Get-Date).ToString('yyyyMMdd_HHmmss')).json"
-    $json | Out-File -FilePath $fileName -Encoding utf8
-    Invoke-RestMethod -Uri "http://127.0.0.1:5000/upload" -Method Post -InFile $fileName -ContentType "application/json"
-
-    return $results
-}
-
-$runButton.Add_Click({
-    $hosts = $textBox.Text.Split(",") | ForEach-Object { $_.Trim() }
-    $output = Run-HealthCheck -Hosts $hosts | Out-String
-    $outputBox.Text = $output
+$RunBtn.Add_Click({
+  Append "Starting health-check (this will attempt to run elevated)."
+  try {
+    $psi = New-Object System.Diagnostics.ProcessStartInfo
+    $psi.FileName = "powershell.exe"
+    $psi.Arguments = "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`" -AggregatorUrl `"$($AggUrl.Text)`""
+    $psi.Verb = "runas"  # request elevation
+    [System.Diagnostics.Process]::Start($psi) | Out-Null
+    Append "Health-check launched (elevated). Check logs in aggregator/uploads/ for JSON."
+  } catch {
+    Append "Failed to launch elevated: $_"
+  }
 })
 
-$form.ShowDialog()
-# Ensure the form is closed properly when the script ends
+$OpenReports.Add_Click({
+  $reports = Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) '..\aggregator\uploads' | Resolve-Path -ErrorAction SilentlyContinue
+  if (-not $reports) { New-Item -ItemType Directory -Path (Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) '..\aggregator\uploads') | Out-Null; $reports = (Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) '..\aggregator\uploads') }
+  Start-Process "explorer.exe" -ArgumentList $reports
+})
+
+$CloseBtn.Add_Click({ $win.Close() })
+
+$win.ShowDialog() | Out-Null

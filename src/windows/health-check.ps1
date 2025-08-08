@@ -1,180 +1,142 @@
-# src/windows/health-check.ps1
-# IT Health Check - Windows
-# This script collects system health data and generates a report in JSON and HTML formats.
-# It includes checks for CPU, memory, disk usage, processes, services, pending updates, and logs.
-
 <#
-.SYNOPSIS
-  IT Health Check - Windows (production-ready)
-.DESCRIPTION
-  Collects CPU, memory, disk, processes, services, pending updates, logs and outputs JSON + HTML report.
+Run as Administrator.
+Collects CPU, memory, disks, processes, services, pending updates, event snippets,
+computes a simple health score & remediation hints, writes JSON and posts to aggregator.
 #>
 
 param(
-  [string]$OutputDir = "$PSScriptRoot\..\..\reports",
-  [switch]$ForceElevated
+  [string]$AggregatorUrl = "http://127.0.0.1:5000/upload",
+  [string]$OutDir = "$PSScriptRoot\..\..\aggregator\uploads"
 )
 
-# --- Helpers ---
-Function Write-Log {
-  param([string]$msg, [string]$level='INFO')
-  $ts = (Get-Date).ToString('s')
-  "$ts [$level] $msg" | Tee-Object -FilePath "$OutputDir\healthcheck.log" -Append
-}
+# ensure outdir
+$OutDir = (Resolve-Path $OutDir -ErrorAction SilentlyContinue).Path
+if (-not $OutDir) { New-Item -ItemType Directory -Path $OutDir -Force | Out-Null; $OutDir = (Resolve-Path $OutDir).Path }
 
-# Ensure output directory
-$OutputDir = (Resolve-Path $OutputDir).Path
-if (!(Test-Path $OutputDir)) { New-Item -ItemType Directory -Path $OutputDir | Out-Null }
+Function Write-Log([string]$m){ $t=(Get-Date).ToString('s'); "$t $m" | Out-File -FilePath (Join-Path $OutDir 'run.log') -Append -Encoding utf8 }
 
-# Elevation check
-If (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
-  Write-Host "Warning: Not running as Administrator. Some checks will be limited." -ForegroundColor Yellow
-  Write-Log "Script started without elevation" "WARN"
-} else {
-  Write-Log "Script started with elevation" "INFO"
-}
+# Basic host info
+$host = $env:COMPUTERNAME
+$os = (Get-CimInstance Win32_OperatingSystem).Caption
+$ip = (Get-NetIPAddress -AddressFamily IPv4 -PrefixOrigin Dhcp -ErrorAction SilentlyContinue |
+        Where-Object { $_.IPAddress -and $_.IPAddress -ne '127.0.0.1' } | Select-Object -First 1 -ExpandProperty IPAddress) -or "N/A"
+$timestamp = (Get-Date).ToString("yyyy-MM-ddTHH:mm:ss")
 
-# Collect host + basic
-$hostName = $env:COMPUTERNAME
-$ip = (Get-NetIPAddress -AddressFamily IPv4 -PrefixOrigin Dhcp -ErrorAction SilentlyContinue | Where-Object {$_.IPAddress -and ($_.IPAddress -ne '127.0.0.1')} | Select-Object -First 1 -ExpandProperty IPAddress) -or 'N/A'
-$os = (Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object -ExpandProperty Caption) -replace '\s+',' '
-
-# CPU
+# CPU (average over 3 samples)
 try {
-  $cpuLoad = Get-CimInstance -ClassName Win32_Processor | Measure-Object -Property LoadPercentage -Average | Select -ExpandProperty Average
-  $cpuPercent = [math]::Round($cpuLoad,0)
-  Write-Log "CPU load collected: $cpuPercent"
-} catch {
-  $cpuPercent = $null; Write-Log "CPU collection failed: $_" "ERROR"
-}
+  $cpus = Get-Counter '\Processor(_Total)\% Processor Time' -SampleInterval 0.5 -MaxSamples 3
+  $cpuVal = [math]::Round(($cpus.CounterSamples | Measure-Object -Property CookedValue -Average).Average,2)
+} catch { $cpuVal = $null; Write-Log "CPU collection failed: $_" }
 
 # Memory
 try {
-  $osInfo = Get-CimInstance -ClassName Win32_OperatingSystem
-  $freeMB = [math]::Round($osInfo.FreePhysicalMemory/1024,2)
-  $totalMB = [math]::Round($osInfo.TotalVisibleMemorySize/1024,2)
+  $osobj = Get-CimInstance Win32_OperatingSystem
+  $totalMB = [math]::Round($osobj.TotalVisibleMemorySize/1024,2)
+  $freeMB = [math]::Round($osobj.FreePhysicalMemory/1024,2)
   $usedMB = [math]::Round($totalMB - $freeMB,2)
-  $mem = @{
-    free_mb = $freeMB; total_mb = $totalMB; used_mb = $usedMB; free_human="$freeMB MB"; total_human="$totalMB MB"
-    free_gb = [math]::Round($freeMB/1024,2); used_gb=[math]::Round($usedMB/1024,2)
-  }
-  Write-Log "Memory collected: $($mem.free_mb)MB free"
-} catch {
-  $mem = @{}; Write-Log "Memory collection failed: $_" "ERROR"
-}
+  $memPercentUsed = if($totalMB -ne 0){ [math]::Round(($usedMB/$totalMB*100),2) } else { 0 }
+} catch { $totalMB=$freeMB=$usedMB=$memPercentUsed=$null; Write-Log "Memory collection failed: $_" }
 
-# Disks
+# Disks (fixed drives)
 $disks = @()
 try {
   Get-CimInstance -ClassName Win32_LogicalDisk -Filter "DriveType=3" | ForEach-Object {
-    $freeGB = [math]::Round($_.FreeSpace/1GB,2)
-    $totalGB = [math]::Round($_.Size/1GB,2)
-    $usedGB = [math]::Round($totalGB - $freeGB,2)
-    $percent = if($totalGB -ne 0){ [math]::Round(($usedGB/$totalGB*100),2) } else { 0 }
+    $totalGB = if ($_.Size) { [math]::Round($_.Size/1GB,2) } else { 0 }
+    $freeGB  = if ($_.FreeSpace) { [math]::Round($_.FreeSpace/1GB,2) } else { 0 }
+    $usedGB  = [math]::Round($totalGB - $freeGB,2)
+    $pct     = if($totalGB -ne 0){ [math]::Round(($usedGB/$totalGB*100),2) } else { 0 }
     $disks += @{
-      mount = $_.DeviceID; free_gb = $freeGB; used_gb=$usedGB; total_gb=$totalGB; percent=$percent;
-      free_human = "$freeGB GB"; used_human="$usedGB GB"
+      mount = $_.DeviceID; total_gb = $totalGB; free_gb = $freeGB; used_gb = $usedGB; percent = $pct
     }
   }
-  Write-Log "Disk info collected"
-} catch { Write-Log "Disk collection failed: $_" "ERROR" }
+} catch { Write-Log "Disk collection failed: $_" }
 
-# Processes & Services
-try {
-  $procCount = (Get-Process | Measure-Object).Count
-  $svcs = Get-Service | Where-Object {$_.Status -eq 'Running'}
-  $svcCount = $svcs.Count
-  Write-Log "Processes: $procCount, Running services: $svcCount"
-} catch { $procCount=0; $svcCount=0; Write-Log "Process/service collection failed: $_" "ERROR" }
+# Top processes (by CPU and Memory)
+$topCPU = (Get-Process | Sort-Object CPU -Descending | Select-Object -First 8 |
+           Select-Object @{n='Name';e={$_.ProcessName}}, @{n='CPU';e={[math]::Round($_.CPU,2)}}, @{n='Id';e={$_.Id}})
+$topMem = (Get-Process | Sort-Object WorkingSet -Descending | Select-Object -First 8 |
+           Select-Object @{n='Name';e={$_.ProcessName}}, @{n='MemMB';e={[math]::Round($_.WorkingSet/1MB,2)}}, @{n='Id';e={$_.Id}})
 
-# Pending updates & vulnerabilities
+# Services count
+try { $svcRunning = (Get-Service | Where-Object {$_.Status -eq 'Running'}).Count } catch { $svcRunning = $null }
+
+# Pending updates (if PSWindowsUpdate available)
 $updates = @()
 try {
-  # Check for PSWindowsUpdate module
   if (Get-Module -ListAvailable -Name PSWindowsUpdate) {
-    Import-Module PSWindowsUpdate -ErrorAction Stop
-    $upg = Get-WUList -ErrorAction SilentlyContinue
-    foreach ($u in $upg) {
-      $updates += @{ name = $u.Title; severity='warn'; note = $u.MsrcSeverity -join ',' }
-    }
-    Write-Log "Windows updates enumerated via PSWindowsUpdate"
+    Import-Module PSWindowsUpdate -ErrorAction SilentlyContinue
+    $wu = Get-WUList -ErrorAction SilentlyContinue
+    foreach ($u in $wu) { $updates += @{ title = $u.Title; severity = ($u.MsrcSeverity -join ',') } }
   } else {
-    # Fallback using Windows Update API via COM (limited)
-    Write-Log "PSWindowsUpdate not found — skipping detailed update list" "WARN"
-    $updates += @{ name='Windows Updates: Module PSWindowsUpdate not installed'; severity='warn'; note='Install PSWindowsUpdate for detailed inventory' }
+    # note: PSWindowsUpdate not installed - can't enumerate updates precisely
+    $updates += @{ title = "PSWindowsUpdate module not installed"; severity = "info"; note = "Install PSWindowsUpdate for details" }
   }
-} catch { Write-Log "Update check failed: $_" "ERROR"; $updates += @{ name='Update check failed'; severity='crit'; note=$_ } }
+} catch { Write-Log "Update check failed: $_"; $updates += @{ title = "Update check error"; severity = "error"; note = $_ } }
 
-# Recent logs (from System and Application - last 200 lines combined)
-$logOutput = ""
+# Recent important events (last 100 filtered)
+$logSnippet = ""
 try {
-  $sys = Get-WinEvent -LogName System -MaxEvents 120 -ErrorAction SilentlyContinue | Select-Object TimeCreated, LevelDisplayName, ProviderName, Id, Message
-  $app = Get-WinEvent -LogName Application -MaxEvents 80 -ErrorAction SilentlyContinue | Select-Object TimeCreated, LevelDisplayName, ProviderName, Id, Message
-  $combined = $sys + $app | Sort-Object TimeCreated -Descending | Select-Object -First 200
-  foreach ($e in $combined) {
-    $logOutput += ($e.TimeCreated.ToString('s') + " [" + $e.LevelDisplayName + "] " + $e.ProviderName + " (" + $e.Id + ") " + ($e.Message -replace "`r`n",' ') + "`n")
-  }
-  Write-Log "Event logs extracted"
-} catch { $logOutput = "Could not extract event logs: $_"; Write-Log "Log extraction failed: $_" "ERROR" }
+  $events = Get-WinEvent -LogName System -MaxEvents 80 -ErrorAction SilentlyContinue |
+            Where-Object { $_.LevelDisplayName -in @('Error','Warning') } |
+            Select-Object TimeCreated, LevelDisplayName, ProviderName, Id, @{n='Msg';e={$_.Message}}
+  $logSnippet = ($events | ForEach-Object { "$($_.TimeCreated.ToString('s')) [$($_.LevelDisplayName)] $($_.ProviderName) ($($_.Id)) - $($_.Msg)" }) -join "`n"
+} catch { Write-Log "Event log extraction failed: $_"; $logSnippet = "Log extraction failed" }
 
-# Basic vuln heuristics (installed critical software versions)
+# Vulnerability heuristics (simple)
 $vulns = @()
 try {
-  # Example checks: outdated .NET, Java, etc. (heuristics)
-  $java = (Get-Command java -ErrorAction SilentlyContinue)
-  if ($java) { $vulns += @{name='Java runtime present'; severity='warn'; note='Verify Java version & patch if pre-8u351/11.x older versions'} }
-} catch { }
+  $java = Get-Command java -ErrorAction SilentlyContinue
+  if ($java) { $vulns += @{ name='Java runtime present'; severity='warn'; note='Check Java version & patch' } }
+} catch {}
 
-# Scoring simple rule
+# Simple scoring rules
 $score = 100
-if ($cpuPercent -gt 85) { $score -= 20 }
-if ($mem.used_mb -gt ($mem.total_mb * 0.9)) { $score -= 20 }
-if ($disks | Where-Object {$_.percent -gt 90}) { $score -= 30 }
-if ($updates.Count -gt 0) { $score -= 10 }
+if ($cpuVal -ne $null -and $cpuVal -gt 85) { $score -= 30 }
+elseif ($cpuVal -ne $null -and $cpuVal -gt 65) { $score -= 10 }
 
-# Remediation suggestions (map checks to actions)
+if ($memPercentUsed -ne $null -and $memPercentUsed -gt 90) { $score -= 25 }
+if ($disks | Where-Object { $_.percent -ge 90 }) { $score -= 25 }
+if ($updates.Count -gt 0 -and ($updates -ne $null)) { $score -= 5 }
+
+# Create remediation hints
 $remediations = @()
-if ($cpuPercent -gt 85) { $remediations += @{ title='High CPU', action='Investigate runaway processes (Get-Process | Sort CPU), consider restarting offending services or scaling resources.' } }
-if ($mem.used_mb -gt ($mem.total_mb * 0.9)) { $remediations += @{ title='Low Memory', action='Check memory-hungry processes, schedule restarts, or add memory/scale VM.' } }
-foreach ($d in $disks) {
-  if ($d.percent -gt 90) { $remediations += @{ title="Disk $($d.mount) nearly full", action="Clean temp files, investigate large files (Get-ChildItem -Path $($d.mount)\ -Recurse | Sort-Object Length -Descending | Select-Object -First 20)" } }
-}
-if ($updates.Count -gt 0) { $remediations += @{ title='Pending Updates', action='Review updates, test on staging, and schedule patch window. Use PSWindowsUpdate to apply: Install-WindowsUpdate -AcceptAll -AutoReboot' } }
+if ($cpuVal -gt 85) { $remediations += @{ title='High CPU', action='Check top processes, consider restarting service or moving workload.' } }
+if ($memPercentUsed -gt 90) { $remediations += @{ title='Low available memory', action='Investigate memory-heavy processes, consider restart or add RAM.' } }
+foreach ($d in $disks) { if ($d.percent -ge 90) { $remediations += @{ title="Disk $($d.mount) nearly full", action="Clean temp, rotate logs, remove old backups or extend volume." } } }
 
-# Aggregate data
-$reportData = @{
-  host = $hostName; ip = $ip; os = $os; timestamp = (Get-Date).ToString('s')
-  cpu = @{ used_percent = $cpuPercent; load = $cpuPercent }
-  memory = $mem
+# Build JSON object
+$report = @{
+  host = $host
+  ip = $ip
+  os = $os
+  timestamp = $timestamp
+  cpu = @{ percent = $cpuVal }
+  memory = @{ total_mb = $totalMB; free_mb = $freeMB; used_mb = $usedMB; used_percent = $memPercentUsed }
   disks = $disks
-  processes = @{ total = $procCount }
-  services = @{ running = $svcCount }
+  top_cpu_processes = $topCPU
+  top_mem_processes = $topMem
+  services = @{ running = $svcRunning }
   updates = $updates
+  logs = $logSnippet
   vulnerabilities = $vulns
-  log = $logOutput
   remediations = $remediations
   score = $score
 }
 
-# Output JSON
-$jsonPath = Join-Path $OutputDir ("report_" + (Get-Date -Format 'yyyyMMdd_HHmmss') + ".json")
-$reportData | ConvertTo-Json -Depth 6 | Out-File -FilePath $jsonPath -Encoding utf8
-Write-Log "Report JSON saved: $jsonPath"
+# write locally
+$jsonfile = Join-Path $OutDir ("report_{0}_{1}.json" -f $host, (Get-Date -Format "yyyyMMdd_HHmmss"))
+$report | ConvertTo-Json -Depth 6 | Out-File -FilePath $jsonfile -Encoding utf8
+Write-Log "Report written to $jsonfile"
 
-# Create HTML by injecting into template
-$templatePath = Join-Path $PSScriptRoot "..\..\templates\report-template.html" | Resolve-Path -ErrorAction SilentlyContinue
-if (Test-Path $templatePath) {
-  $html = Get-Content $templatePath -Raw
-  $json = Get-Content $jsonPath -Raw
-  # inject as JS variable
-  $injected = $html -replace '/\* INSERT_DATA_HERE \*/', "var REPORT_DATA = $json;"
-  $htmlPath = Join-Path $OutputDir ("report_" + (Get-Date -Format 'yyyyMMdd_HHmmss') + ".html")
-  $injected | Out-File -FilePath $htmlPath -Encoding utf8
-  Write-Log "HTML report generated: $htmlPath"
-  Write-Host "Report generated: $htmlPath"
-} else {
-  Write-Log "Template not found; HTML generation skipped" "WARN"
-  Write-Host "Template not found. JSON saved at $jsonPath"
+# POST to aggregator (best effort)
+try {
+  $body = Get-Content -Raw -Path $jsonfile
+  Invoke-RestMethod -Uri $AggregatorUrl -Method Post -Body $body -ContentType 'application/json' -TimeoutSec 30
+  Write-Log "Posted report to $AggregatorUrl"
+} catch {
+  Write-Log "Failed to post to aggregator: $_"
 }
 
+# Output to console
+$report | ConvertTo-Json -Depth 6
 exit 0

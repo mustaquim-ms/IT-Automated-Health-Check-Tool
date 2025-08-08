@@ -1,0 +1,126 @@
+{
+  "host": "Omni-IT-02",
+  "platform": "Windows-11-10.0.26100-SP0",
+  "uptime_seconds": 860565.6534888744,
+  "ip": "169.254.169.175",
+  "iface": "Local Area Connection* 9",
+  "cpu_percent": 18.0,
+  "memory_total_mb": 7884.87,
+  "memory_used_mb": 6748.69,
+  "memory_percent": 85.6,
+  "disks": [
+    {
+      "mount": "C:\\",
+      "device": "C:\\",
+      "total_gb": 160.5,
+      "used_gb": 106.34,
+      "free_gb": 54.16,
+      "percent": 66.3
+    },
+    {
+      "mount": "D:\\",
+      "device": "D:\\",
+      "total_gb": 174.7,
+      "used_gb": 130.19,
+      "free_gb": 44.51,
+      "percent": 74.5
+    },
+    {
+      "mount": "E:\\",
+      "device": "E:\\",
+      "total_gb": 174.69,
+      "used_gb": 123.13,
+      "free_gb": 51.56,
+      "percent": 70.5
+    },
+    {
+      "mount": "G:\\",
+      "device": "G:\\",
+      "total_gb": 16.11,
+      "used_gb": 0.1,
+      "free_gb": 16.01,
+      "percent": 0.6
+    }
+  ],
+  "network_interfaces": [
+    {
+      "iface": "Local Area Connection* 9",
+      "address": "169.254.169.175",
+      "netmask": "255.255.0.0"
+    },
+    {
+      "iface": "Local Area Connection* 10",
+      "address": "169.254.159.174",
+      "netmask": "255.255.0.0"
+    },
+    {
+      "iface": "Wi-Fi",
+      "address": "192.168.0.102",
+      "netmask": "255.255.255.0"
+    },
+    {
+      "iface": "Loopback Pseudo-Interface 1",
+      "address": "127.0.0.1",
+      "netmask": "255.0.0.0"
+    }
+  ],
+  "network_online": true,
+  "top_cpu_processes": [
+    {
+      "pid": 0,
+      "name": "System Idle Process",
+      "cpu": 483.6,
+      "mem_mb": 0.01
+    },
+    {
+      "pid": 3268,
+      "name": "MemCompression",
+      "cpu": 17.6,
+      "mem_mb": 194.79
+    },
+    {
+      "pid": 4,
+      "name": "System",
+      "cpu": 12.2,
+      "mem_mb": 0.12
+    },
+    {
+      "pid": 1636,
+      "name": "dwm.exe",
+      "cpu": 9.1,
+      "mem_mb": 37.84
+    },
+    {
+      "pid": 23168,
+      "name": "chrome.exe",
+      "cpu": 7.0,
+      "mem_mb": 178.76
+    },
+    {
+      "pid": 26984,
+      "name": "python.exe",
+      "cpu": 6.7,
+      "mem_mb": 25.15
+    },
+    {
+      "pid": 19352,
+      "name": "chrome.exe",
+      "cpu": 6.4,
+      "mem_mb": 93.44
+    },
+    {
+      "pid": 11224,
+      "name": "Code.exe",
+      "cpu": 5.5,
+      "mem_mb": 41.43
+    }
+  ],
+  "score": 88,
+  "remediations": [
+    {
+      "title": "High memory usage",
+      "action": "Investigate processes consuming memory."
+    }
+  ],
+  "collected_at": "2025-08-08T23:37:16.801966"
+}
