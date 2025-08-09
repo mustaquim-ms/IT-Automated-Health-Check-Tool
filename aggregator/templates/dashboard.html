@@ -1,75 +1,113 @@
 <!doctype html>
-<html>
+<html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <title>IT Health Dashboard</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/static/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PC Health Check</title>
+
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+
+  <!-- styles -->
+  <link rel="stylesheet" href="/static/style.css">
 </head>
+
 <body>
-  <header>
-    <div class="brand">
-      <h1>IT Health Check</h1>
-      <p class="subtitle">Local scanner • Real-time dashboard • Full / Partial scans</p>
-    </div>
-    <div class="controls">
-      <button id="btnPartial" class="btn">Run Partial Scan</button>
-      <button id="btnFull" class="btn primary">Run Full Scan</button>
-      <div id="statusBadge" class="badge">Idle</div>
-    </div>
-  </header>
+  <div id="app">
+    <header class="topbar">
+      <div class="left">
+        <div class="logo">⚙️</div>
+        <div class="title">
+          <h1>IT Health</h1>
+          <div class="subtitle">Performance & Diagnostics</div>
+        </div>
+      </div>
+      <div class="right">
+        <div class="controls">
+          <button id="partialBtn" class="btn ghost">Partial Scan</button>
+          <button id="fullBtn" class="btn neon">Full Scan</button>
+          <select id="boostMode" class="select">
+            <option value="soft">Boost: Soft</option>
+            <option value="hard">Boost: Hard</option>
+          </select>
+          <button id="boostBtn" class="btn ghost">Boost</button>
+        </div>
+        <div id="statusBadge" class="status">Idle</div>
+      </div>
+    </header>
 
-  <main>
-    <section class="kpiRow">
-      <div class="kpi card">
-        <div class="kpi-title">Host</div>
-        <div id="hostName" class="kpi-value">—</div>
-      </div>
-      <div class="kpi card">
-        <div class="kpi-title">IP</div>
-        <div id="hostIP" class="kpi-value">—</div>
-      </div>
-      <div class="kpi card">
-        <div class="kpi-title">Score</div>
-        <div id="healthScore" class="kpi-value">—</div>
-      </div>
-      <div class="kpi card">
-        <div class="kpi-title">Network</div>
-        <div id="netState" class="kpi-value">—</div>
-      </div>
-    </section>
+    <main class="container">
+      <section class="topline">
+        <canvas id="historyChart" height="90"></canvas>
+      </section>
 
-    <section class="charts">
-      <div class="card chartCard">
-        <h3>CPU Usage</h3>
-        <canvas id="cpuChart"></canvas>
-      </div>
-      <div class="card chartCard">
-        <h3>Memory Usage</h3>
-        <canvas id="memChart"></canvas>
-      </div>
-      <div class="card chartCard full">
-        <h3>Disk Usage</h3>
-        <canvas id="diskChart"></canvas>
-      </div>
-    </section>
+      <section class="kpis grid">
+        <div class="card host">
+          <div class="kpi-title">Host</div>
+          <div id="hostName" class="kpi-value">—</div>
+          <div id="hostIP" class="muted">IP —</div>
+          <div id="hostOS" class="muted">OS —</div>
+        </div>
 
-    <section class="logs card">
-      <h3>Live Terminal Logs</h3>
-      <pre id="logArea" class="logTerminal" aria-live="polite"></pre>
-    </section>
+        <div class="card kpi">
+          <div class="kpi-title">Score</div>
+          <div id="scoreVal" class="kpi-value big">—</div>
+          <div class="muted">Lower is worse — 0 to 100</div>
+        </div>
 
-    <section class="remediations card">
-      <h3>Suggested Remediations</h3>
-      <ul id="remList"></ul>
-    </section>
-  </main>
+        <div class="card chartSmall">
+          <div class="kpi-title">CPU</div>
+          <canvas id="cpuChart" height="120"></canvas>
+          <div class="muted" id="cpuText">—%</div>
+        </div>
 
-  <footer>
-    <small>© IT Health Check — Ahmad</small>
-  </footer>
+        <div class="card chartSmall">
+          <div class="kpi-title">Memory</div>
+          <canvas id="memChart" height="120"></canvas>
+          <div class="muted" id="memText">—%</div>
+        </div>
 
-<script src="/static/dashboard.js" defer></script>
+        <div class="card chartLarge full">
+          <div class="kpi-title">Disks</div>
+          <canvas id="diskChart" height="160"></canvas>
+        </div>
+      </section>
+
+      <section class="bottom grid lower">
+        <div class="card logs">
+          <div class="card-head">
+            <div><strong>Live Terminal Logs</strong></div>
+            <div><button id="clearLogs" class="btn tiny">Clear</button></div>
+          </div>
+          <pre id="logArea" class="logTerminal" aria-live="polite"></pre>
+        </div>
+
+        <div class="card rems">
+          <div class="card-head">
+            <div><strong>Remediations & Top Processes</strong></div>
+            <div class="muted tiny">Manage apps to free resources</div>
+          </div>
+          <div id="remList" class="remList"></div>
+        </div>
+      </section>
+
+      <section class="actions">
+        <button id="clearTempBtn" class="btn ghost">Clear Temp</button>
+        <button id="refreshBtn" class="btn">Refresh Now</button>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <small>© IT Health • Ahmad — Dark Neon UI</small>
+    </footer>
+
+  </div>
+
+  <script src="/static/dashboard.js" defer></script>
 </body>
+
 </html>

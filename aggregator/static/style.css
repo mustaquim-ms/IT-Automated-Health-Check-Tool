@@ -1,33 +1,248 @@
-:root{
-  --bg1:#071021; --bg2:#0b2a3a; --accent:#00e6e6; --muted:#9fb6bf;
-  --card:#0f2b36; --glass: rgba(255,255,255,0.03);
+/* Dark-neon dashboard styling */
+:root {
+  --bg: #06070a;
+  --panel: #071226;
+  --muted: #7fb6c2;
+  --neon: #4be3ff;
+  --neon2: #9bff8b;
+  --accent: #8a5bff;
+  --glass: rgba(255, 255, 255, 0.03);
+  --card-radius: 12px;
 }
-*{box-sizing:border-box}
-body{margin:0;font-family:Inter,Segoe UI,Roboto,Arial;background:linear-gradient(135deg,var(--bg1),var(--bg2));color:#e6f9fb}
-header{display:flex;justify-content:space-between;align-items:center;padding:18px 28px}
-.brand h1{margin:0;color:var(--accent);font-size:1.6rem}
-.brand .subtitle{color:var(--muted);margin:2px 0 0;font-size:0.9rem}
-.controls{display:flex;gap:12px;align-items:center}
-.btn{padding:10px 14px;border-radius:8px;border:none;background:transparent;color:#e6f9fb;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,0.25)}
-.btn.primary{background:linear-gradient(90deg,#00c8ff,#00e6a8);color:#00262b;font-weight:700}
-.badge{background:var(--glass);padding:8px 10px;border-radius:999px;color:var(--muted);font-weight:600}
 
-main{padding:20px;max-width:1200px;margin:0 auto}
-.kpiRow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
-.kpi.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:12px;border-radius:10px}
-.kpi-title{font-size:0.85rem;color:var(--muted)}
-.kpi-value{font-size:1.2rem;color:var(--accent);margin-top:8px}
+* {
+  box-sizing: border-box
+}
 
-.charts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
-.chartCard{padding:12px;border-radius:12px;background:var(--card)}
-.chartCard.full{grid-column:1 / -1}
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #03040a, #07111a);
+  font-family: Inter, Segoe UI, Roboto, Arial;
+  color: #e6fbff
+}
 
-.card{background:var(--card);padding:12px;border-radius:12px;box-shadow:0 8px 30px rgba(2,10,16,0.5)}
-.logs{margin-bottom:16px}
-.logTerminal{background:#021017;color:#c9f8f8;padding:12px;height:260px;border-radius:8px;overflow:auto;font-family:ui-monospace, SFMono-Regular, Menlo, monospace;font-size:13px}
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 22px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.02)
+}
 
-.remediations ul{margin:0;padding-left:18px}
-.remediations li{margin:8px 0}
+.left {
+  display: flex;
+  gap: 12px;
+  align-items: center
+}
 
-footer{padding:14px;text-align:center;color:var(--muted)}
-@media (max-width:900px){.kpiRow{grid-template-columns:repeat(2,1fr)} .charts{grid-template-columns:1fr}}
+.logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--neon), #00c2ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 6px 24px rgba(75, 227, 255, 0.08)
+}
+
+.title h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: var(--neon)
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 0.85rem
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+  align-items: center
+}
+
+.btn {
+  border: 0;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--neon);
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 26px rgba(0, 200, 255, 0.06)
+}
+
+.btn.neon {
+  background: linear-gradient(90deg, var(--neon), #7bffb8);
+  color: #011;
+  font-weight: 700
+}
+
+.btn.ghost {
+  background: var(--glass)
+}
+
+.select {
+  background: transparent;
+  border-radius: 8px;
+  padding: 8px;
+  color: var(--neon);
+  border: 1px solid rgba(255, 255, 255, 0.04)
+}
+
+.status {
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--muted);
+  font-weight: 700
+}
+
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 22px
+}
+
+.topline {
+  margin-bottom: 12px
+}
+
+.kpis.grid {
+  display: grid;
+  grid-template-columns: 220px 1fr 180px 180px;
+  gap: 12px
+}
+
+.card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+  padding: 12px;
+  border-radius: var(--card-radius);
+  box-shadow: 0 10px 28px rgba(2, 10, 16, 0.6)
+}
+
+.card.kpi {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center
+}
+
+.kpi-title {
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin-bottom: 6px
+}
+
+.kpi-value {
+  font-size: 1.4rem;
+  color: var(--neon);
+  font-weight: 700
+}
+
+.big {
+  font-size: 2rem;
+  color: var(--neon)
+}
+
+.chartSmall {
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}
+
+.chartLarge {
+  min-height: 180px
+}
+
+.full {
+  grid-column: 1 / -1
+}
+
+.lower {
+  grid-template-columns: 2fr 1fr;
+  margin-top: 12px
+}
+
+.logs .card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px
+}
+
+.logTerminal {
+  background: rgba(0, 15, 18, 0.6);
+  padding: 12px;
+  border-radius: 8px;
+  height: 360px;
+  overflow: auto;
+  color: #bffcff;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px
+}
+
+.remList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px
+}
+
+.remItem {
+  padding: 8px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.005));
+  display: flex;
+  justify-content: space-between;
+  align-items: center
+}
+
+.remItem .title {
+  font-weight: 600;
+  color: var(--neon2)
+}
+
+.muted {
+  color: var(--muted)
+}
+
+.tiny {
+  font-size: 0.85rem;
+  color: var(--muted)
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 12px
+}
+
+.footer {
+  padding: 14px;
+  text-align: center;
+  color: var(--muted);
+  opacity: 0.9
+}
+
+/* responsive */
+@media (max-width:1000px) {
+  .kpis.grid {
+    grid-template-columns: 1fr
+  }
+
+  .lower {
+    grid-template-columns: 1fr
+  }
+
+  .topline canvas {
+    height: 120px !important
+  }
+}

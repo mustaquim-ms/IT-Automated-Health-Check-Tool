@@ -1,0 +1,27 @@
+[
+  {
+    "time": "2025-08-09T08:59:55.052339",
+    "host": "Omni-IT-02",
+    "score": 88,
+    "cpu": 23.5,
+    "memory": 92.1,
+    "disks": [
+      {
+        "mount": "C:\\",
+        "percent": 66.8
+      },
+      {
+        "mount": "D:\\",
+        "percent": 75.8
+      },
+      {
+        "mount": "E:\\",
+        "percent": 71.1
+      },
+      {
+        "mount": "G:\\",
+        "percent": 0.6
+      }
+    ]
+  }
+]
